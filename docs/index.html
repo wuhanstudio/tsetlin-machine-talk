@@ -41,8 +41,12 @@
                 </section>
 
                 <section>
-                    <h2>Question 1: Booleanize</h2>
-                    <p>Multiple Threholds</p>
+                    <h2 class="r-fit-text">Question 1: Different ways to Booleanize</h2>
+                    <p style="font-size: 35px;">Method 1: Single Thresholds</p>
+                    <pre><code data-trim class="language-python">
+                    >>> a_bool = a > threshold
+                    </code></pre>
+                    <p style="font-size: 35px;">Method 2: Multiple Thresholds</p>
                     <div class="mermaid">
                         <pre>
                             flowchart TD
@@ -60,17 +64,43 @@
                                 D -- 0.2 --> H;
                         </pre>
                     </div>
+                    <p style="font-size: 35px;">Method 3: Normalize to [0, 255] 8-bit</p>
+                    <pre><code data-trim class="language-python">
+                    >>> x = (x - x.mean()) / x.std()
+                    >>> x_norm = int(x * 255).astype(np.uint8)
+                    </code></pre>
                 </section>
                 
                 <section>
-                    <h2>Question 2: Pairwise Learning</h2>
-                    <p>Multiple classes</p>
+                    <h2 class="r-fit-text">Question 2: State Increment +1 or +0.2</h2>
+                    <p style="font-size: 35px;">Method 1: Discrete State</p>
+                    <pre><code data-trim class="language-python">
+                    >>> def reward(self):
+                            if self.state < self.N_state:
+                                self.state += 1
+
+                    >>> def penalty(self):
+                            if self.state > 1:
+                                self.state -= 1
+                    </code></pre>
+                    <p style="font-size: 35px;">Method 2: Continuous State</p>
+                    <pre><code data-trim class="language-python">
+                    >>> def reward(self):
+                            if self.state < self.N_state:
+                                self.state += 0.9
+                    >>> def penalty(self):
+                            if self.state > 0:
+                                self.state -= 0.1
+                    </code></pre>
                 </section>
 
                 <section>
-                    <h2>Question 3: Increment State 0.2</h2>
-                    <p>Multiple classes</p>
+                    <h2>Question 3: Pairwise Learning</h2>
+                    <p class="r-fit-text">Why does the pairwise learning only choose another ONE random class?</p>
+                    <p style="font-size: 35px; margin-top: 0; text-align: left; margin-bottom: 0;">Can we feedback on all classes?</p>
+                    <img src="images/pairwise.png" width="100%" />
                 </section>
+
 
                 <section>
                     <h2>Thanks</h2>
